@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: nacos-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.111.131:8848 #注册中心地址
+    gateway:
+      discovery:
+        locator:
+          # 让gateway通过服务发现组件找到其它的微服务
+          enabled: false
+      routes:
+        - id: nacos-feign
+          uri: lb://nacos-feign
+          predicates:
+            - Path=/service-1/**
+          filters: # 过滤器,请求在传递过程中可以通过过滤器对其进行一定的修改
+            - StripPrefix=1           # 转发之前去掉1层路径
+server:
+  port: 17000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        # 暴露出所有actuator监控的端点
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
