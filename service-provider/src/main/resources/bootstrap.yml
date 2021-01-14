@@ -4,16 +4,11 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 192.168.111.131:8848 #注册中心地址
+        server-addr: localhost:8848 #注册中心地址
       config:
-        server-addr: 192.168.111.131:8848 #注册中心地址
-        namespace: 4eb1ac0a-9db1-41a1-9b7c-4f8470c8d76d
-        group: group_1
-
-  profiles:
-    active: pro
+        server-addr: localhost:8848 #注册中心地址
 
 server:
-  port: 17357
+  port: 10000
 
 
